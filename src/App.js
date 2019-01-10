@@ -39,7 +39,11 @@ class BooksApp extends Component {
 
   redirect = () => {
     console.log("I'm being called");
-    return <Redirect to='/search'/>
+    return(
+        <Router>
+         <Redirect to='/search'/>
+        </Router>
+    )
   }
 
   render() {

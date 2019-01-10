@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookShelf from './BookShelf'
-import { Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import BookSearch from './BookSearch'
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -25,6 +26,7 @@ class BooksApp extends React.Component {
     })
   }
 
+
   changeShelf = (book, shelf) => {
     let bookObject = book.props.book;
     bookObject.shelf = shelf;
@@ -35,10 +37,23 @@ class BooksApp extends React.Component {
 
   }
 
+  redirect = () => {
+    console.log("I'm being called");
+    return <Redirect to='/search'/>
+  }
+
   render() {
     return (
         <div className="app">
-        {this.state.showSearchPage ? (
+          <Router>
+            <Switch>
+              <Route exact path="/" render={() => (
+                  <BookShelf books = {this.state.books} changeShelfState = {this.changeShelf} />
+              )} />
+              <Route path="/search" component={ BookSearch }/>
+            </Switch>
+          </Router>
+          {/*{this.state.showSearchPage ? (
           <div className="search-books">
             <div className="search-books-bar">
               <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
@@ -62,7 +77,16 @@ class BooksApp extends React.Component {
               <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
             </div>
           </div>
-        )}
+        )}*/}
+
+          <div className="open-search">
+            <button onClick={this.redirect}>Add a book</button>
+            {/*<Router>
+            <Link to='search'>Add a book</Link>
+            </Router>*/}
+          </div>
+
+
       </div>
     )
   }

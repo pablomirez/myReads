@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import { withRouter} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 class BookSearch extends Component {
 
 
 
     render(){
+        console.log("I'm getting all the books on the search");
+        console.log(this.props.books);
         return(
             <div className="search-books">
                 <div className="search-books-bar">
-                    <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
+                    <Link to="/">
+                        <button className="close-search">Close</button>
+                    </Link>
                     <div className="search-books-input-wrapper">
                         <input type="text" placeholder="Search by title or author"/>
                     </div>
@@ -23,3 +27,5 @@ class BookSearch extends Component {
 }
 
 export default BookSearch;
+
+

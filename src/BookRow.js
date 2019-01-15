@@ -4,8 +4,6 @@ import SingleBook from './SingleBook'
 
 const BookRow = function(props){
     let onChangeBookFromShelf = (book, shelf) => {
-        console.log("I'm supposed to get the information here");
-        console.log(book, shelf);
         props.onUpdateShelfStatus(book, shelf);
     }
 

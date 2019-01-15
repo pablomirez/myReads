@@ -39,9 +39,8 @@ class BooksApp extends Component {
                 <Route exact path="/" render={() => (
                     <BookShelf books={this.state.books} changeShelfState={this.changeShelf}/>
                 )}/>
-                    {/*<Route path="/search" component={BookSearch}/>*/}
                 <Route path="/search" render={() => (
-                    <BookSearch books={this.state.books} />
+                    <BookSearch books={this.state.books} changeShelfState={this.changeShelf} />
                 )}/>
                 <div className="open-search">
                     <Link to='search'>

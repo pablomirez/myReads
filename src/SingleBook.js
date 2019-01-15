@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 class SingleBook extends Component {
 
     shelfChange = (e)=> {
-        console.log(e);
         let newShelfStatus = e.target.value;
         this.props.changeBookFromShelf(this, newShelfStatus)
     }

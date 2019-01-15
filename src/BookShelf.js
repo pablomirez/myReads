@@ -3,7 +3,6 @@ import BookRow from './BookRow';
 
 class BookShelf extends Component {
 
-
     updateShelfStatus = (book, shelf) => {
         this.props.changeShelfState(book, shelf);
 
@@ -11,8 +10,6 @@ class BookShelf extends Component {
     }
 
     render(){
-        console.log("BookShelf is getting some props here");
-        console.log(this.props.books);
         return(
             <div className="list-books-content">
                 <div>

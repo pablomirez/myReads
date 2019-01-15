@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SingleBook from "./SingleBook";
 
 class BookSearch extends Component {
 
     state = {
-        query: ''
+        query: '',
+        selectedBook: ''
     }
 
     updateQuery = (query) => {
@@ -13,6 +15,10 @@ class BookSearch extends Component {
         }))
     }
 
+
+    onChangeBookFromShelf = (book, shelf) => {
+        this.props.changeShelfState(book, shelf);
+    }
     render(){
         const { query } = this.state
         const { books } = this.props
@@ -38,30 +44,13 @@ class BookSearch extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    {/*<ol className="books-grid">
-                        {showingSearchedBooks.map((book)=> (
-                            <li key={book.id}>
-                                <div>
-                                    <p>{book.title}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ol>*/}
                     <ol className="books-grid">
                     {showingSearchedBooks.map((book) => (
                         <li key={book.id}>
-                                <div className="book">
-                                    <div className="book-top">
-                                        <div className="book-cover"
-                                             style={{
-                                                 width: 128,
-                                                 height: 193,
-                                                 backgroundImage:  `url(${book.imageLinks.thumbnail})` }}>
-                                        </div>
-                                    </div>
-                                    <div className="book-title">{book.title}</div>
-                                    <div className="book-authors">{book.authors}</div>
-                                </div>
+                            <SingleBook
+                                book={book}
+                                changeBookFromShelf={this.onChangeBookFromShelf}
+                            />
                         </li>
                     ))}
                     </ol>

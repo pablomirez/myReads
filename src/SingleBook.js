@@ -17,7 +17,9 @@ class SingleBook extends Component {
                              style={{
                                  width: 128,
                                  height: 193,
-                                 backgroundImage:  `url(${this.props.book.imageLinks.thumbnail})` }}></div>
+                                 backgroundImage:  `url(${this.props.book.imageLinks.thumbnail})` }}>
+
+                        </div>
                         <div className="book-shelf-changer">
                             <select onChange={this.shelfChange} defaultValue={this.props.book.shelf}>
                                 <option value="move" disabled>Move to...</option>

@@ -13,10 +13,17 @@ class BookSearch extends Component {
 
     updateQuery = (query) => {
         this.setState(() => ({
-            query: query.trim()
+            query: query
         }))
 
-        this.searchBook(query)
+        if(query.length > 2){
+            this.searchBook(query)
+        } else {
+            this.setState(() => ({
+                Books: []
+            }))
+
+        }
     }
 
     searchBook = (query) => {
@@ -37,14 +44,11 @@ class BookSearch extends Component {
     }
 
     setNoneShelf = (books) => {
-        console.log("I'm getting the books to none");
-        console.log(books);
         //Now I need to set up all this books to have a none shelf
         for(let book of books){
             book.shelf = "none"
         }
         return books;
-
     }
 
     onChangeBookFromShelf = (book, shelf) => {

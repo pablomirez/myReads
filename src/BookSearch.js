@@ -8,7 +8,9 @@ class BookSearch extends Component {
     state = {
         Books: [],
         query: '',
-        selectedBook: ''
+        selectedBook: '',
+        OrganizedBooks: this.props.books
+
     }
 
     updateQuery = (query) => {
@@ -31,7 +33,7 @@ class BookSearch extends Component {
         if(query.length > 0){
             BooksAPI.search(query).then((books) => {
                 if(books.length > 0){
-                    books = books.filter((book) => (book.imageLinks))
+                    //books = books.filter((book) => (book.imageLinks))
                     books = this.setNoneShelf(books)
                     this.setState(() => {
                         return { Books: books}
@@ -46,13 +48,30 @@ class BookSearch extends Component {
     setNoneShelf = (books) => {
         //Now I need to set up all this books to have a none shelf
         for(let book of books){
-            book.shelf = "none"
+            let isBookSetup = false
+            isBookSetup = this.alreadySelectedBookStatus(book);
+            if(!isBookSetup){
+                book.shelf = "none";
+            }
         }
         return books;
     }
 
     onChangeBookFromShelf = (book, shelf) => {
         this.props.changeShelfState(book, shelf);
+    }
+
+
+    //Observes if the book throw from the search already has not a shelf status;
+    alreadySelectedBookStatus = (book) => {
+        let bookHasbeenSelected = false;
+        for(let bookProp of this.state.OrganizedBooks) {
+            if (bookProp.id == book.id) {
+                bookHasbeenSelected = true;
+                book.shelf = bookProp.shelf;
+            }
+        }
+        return bookHasbeenSelected;
     }
 
 

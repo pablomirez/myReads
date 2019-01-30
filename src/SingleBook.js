@@ -16,7 +16,7 @@ class SingleBook extends Component {
                              style={{
                                  width: 128,
                                  height: 193,
-                                 backgroundImage:  `url(${this.props.book.imageLinks.thumbnail})` }}>
+                                 backgroundImage: typeof this.props.book.imageLinks != 'undefined' ? `url(${this.props.book.imageLinks.thumbnail})` : '' }}>
 
                         </div>
                         <div className="book-shelf-changer">
